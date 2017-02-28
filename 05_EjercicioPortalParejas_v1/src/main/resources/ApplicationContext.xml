@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.atsistemas.curso.persistencia.memoria.MemoriaPersonaDao">
+		<constructor-arg name="tablaPersonas">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<ref bean="victor" />
+				</entry>
+				<entry>
+					<key>
+						<value>2</value>
+					</key>
+					<bean class="com.atsistemas.curso.entidades.Persona">
+						<constructor-arg name="id" value="2" />
+						<constructor-arg name="nombre" value="Maria" />
+					</bean>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="victor" class="com.atsistemas.curso.entidades.Persona">
+		<constructor-arg name="id" value="1" />
+		<constructor-arg name="nombre" value="Victor" />
+	</bean>
+
+</beans>
