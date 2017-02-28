@@ -1,0 +1,13 @@
+#workspace
+.metadata
+.recommenders
+Servers/
+RemoteSystemsTempFiles/
+
+#proyect
+.settings/
+target/
+.project
+.classpath
+.springBeans
+bin/
