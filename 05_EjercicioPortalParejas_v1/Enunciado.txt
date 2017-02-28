@@ -1,0 +1,34 @@
+Persona
+	id (long)
+	nombre (String)
+	
+PersonaDao
+	insertar(Persona)
+	List<Persona> consultarPorNombre(String)
+	List<Persona> consultarTodos()
+	
+Negocio
+	boolean esAfin(Persona target, Persona candidato)
+	boolean esIdeal(Persona target, Persona candidato)
+	
+Servicio
+	void altaUsuario(Persona)
+	List<Persona> busquedaDeAfines(Persona)
+	Persona busquedaIdeal(Persona)
+	
+--------------------------------------
+
+Emplear JavaConfig y las anotaciones @Component, @Service, @Controller,
+@Repository, @Autowired y @Qualifier segun la necesidad
+
+--------------------------------------
+
+Crear una implementacion de PersonaDao en Memoria con un Map<id,Persona>
+
+Condicion de Afin que empiece por la misma letra el nombre
+Condicionde Ideal que sean iguales los nombres
+
+Probar con una aplicación de consola, invocando la funcionalidades que 
+expone el servicio
+	
+	
