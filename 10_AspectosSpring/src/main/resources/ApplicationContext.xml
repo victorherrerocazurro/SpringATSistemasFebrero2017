@@ -16,6 +16,12 @@
 <!-- 			<aop:after-returning method="despuesDelTargetFiltrandoElResultado" pointcut-ref="retorno" returning="retorno"/> -->
 <!-- 			<aop:around method="duranteElTarget" pointcut-ref="retorno"/> -->
 		</aop:aspect>
+		<aop:aspect>
+			<aop:declare-parents 
+				types-matching="com.atsistemas.curso.Servicio+" 
+				implement-interface="com.atsistemas.curso.Extension"
+				default-impl="com.atsistemas.curso.ExtensionImpl"/>
+		</aop:aspect>
 	</aop:config>
 
 	<bean id="aspecto" class="com.atsistemas.curso.Aspecto"></bean>
