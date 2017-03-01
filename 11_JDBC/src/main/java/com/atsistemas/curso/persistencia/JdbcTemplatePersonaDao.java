@@ -3,7 +3,6 @@ package com.atsistemas.curso.persistencia;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.atsistemas.curso.entidades.Persona;
