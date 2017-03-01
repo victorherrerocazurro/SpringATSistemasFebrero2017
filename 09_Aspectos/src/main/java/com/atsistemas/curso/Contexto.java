@@ -7,7 +7,7 @@ public class Contexto {
 			//return new MiServicio();
 			
 			//Lo que hace es
-			return new ProxyServicio(new MiServicio(), new ExtensionImpl());
+			return new ProxyServicio(new MiServicio(), new ExtensionImpl(), new Aspecto());
 		} else {
 			return null;
 		}

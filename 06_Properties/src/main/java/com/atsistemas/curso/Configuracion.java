@@ -16,7 +16,8 @@ public class Configuracion {
 	//con la sintaxis ${key}
 	@Bean
 	public PropertyPlaceholderConfigurer properties(){
-		PropertyPlaceholderConfigurer placeholderConfigurer = new PropertyPlaceholderConfigurer();
+		PropertyPlaceholderConfigurer placeholderConfigurer 
+								= new PropertyPlaceholderConfigurer();
 		
 		placeholderConfigurer.setLocation(
 				new ClassPathResource("Configuracion.properties"));

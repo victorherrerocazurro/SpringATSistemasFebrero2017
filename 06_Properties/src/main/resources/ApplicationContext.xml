@@ -11,4 +11,8 @@
 
 	<context:property-placeholder location="classpath:Configuracion.properties"/>
 
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:Configuracion.properties"></property>
+	</bean>-->
+
 </beans>

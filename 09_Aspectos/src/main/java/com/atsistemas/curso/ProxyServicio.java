@@ -6,10 +6,13 @@ public class ProxyServicio implements Servicio, Extension{
 
 	private Extension extension;
 	
-	public ProxyServicio(Servicio target,Extension extension) {
+	private Aspecto aspecto;
+	
+	public ProxyServicio(Servicio target,Extension extension, Aspecto aspecto) {
 		super();
 		this.target = target;
 		this.extension = extension;
+		this.aspecto = aspecto;
 	}
 
 	public String metodoInterceptado(String numero) {
@@ -20,7 +23,10 @@ public class ProxyServicio implements Servicio, Extension{
 		
 		String resultado = target.metodoNoInterceptado(numero);
 		
-		System.out.println("Acaba de llegar:" + numero);
+		//System.out.println("Acaba de llegar:" + numero);
+		
+		aspecto.antesDelTarget(numero);
+		
 		System.out.println("Acabamos de retornar:" + resultado);
 		return resultado + " esta es mi aportacion desde el proxy";
 	}
