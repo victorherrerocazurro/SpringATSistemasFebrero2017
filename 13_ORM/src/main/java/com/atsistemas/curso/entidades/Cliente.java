@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CLIENTES")
-@Access(AccessType.PROPERTY)
+//@Access(AccessType.PROPERTY)
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -3,37 +3,44 @@ package com.atsistemas.curso.persistencia.hibernate;
 import java.util.Collection;
 import java.util.List;
 
-import org.hibernate.Session;
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.atsistemas.curso.entidades.Factura;
 import com.atsistemas.curso.persistencia.FacturaDao;
 
+@Component
+@Transactional
 public class HibernateFacturaDao implements FacturaDao{
 
-	private Session session;
+	private SessionFactory sessionFactory;
 	
-	public HibernateFacturaDao(Session session) {
+	@Autowired
+	public HibernateFacturaDao(SessionFactory sessionFactory) {
 		super();
-		this.session = session;
+		this.sessionFactory = sessionFactory;
 	}
 
 	public void insertar(Factura entidad) {
-		session.persist(entidad);
+		sessionFactory.getCurrentSession().persist(entidad);
 	}
 
 	public Factura consultarPorId(long id) {
-		return session.find(Factura.class, id);
+		return sessionFactory.getCurrentSession().find(Factura.class, id);
 	}
 
 	public Collection<Factura> consultarTodos() {
-		return session.createQuery(
+		return sessionFactory.getCurrentSession().createQuery(
 							"from Factura", 
 							Factura.class).getResultList();
 	}
 
 	public List<Factura> consultarPorCantidad(float cantidad) {
-		Query<Factura> query = session.createQuery(
+		Query<Factura> query = sessionFactory.getCurrentSession().createQuery(
 					"from Factura f where f.cantidad = :c", 
 					Factura.class);
 		query.setParameter("c", cantidad);

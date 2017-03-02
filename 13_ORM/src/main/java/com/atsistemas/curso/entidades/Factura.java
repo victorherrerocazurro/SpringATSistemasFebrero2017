@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,29 +14,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.type.CalendarType;
+
 @Entity
 @Table(name="FACTURAS")
-@Access(AccessType.PROPERTY)
+//@Access(AccessType.PROPERTY)
 public class Factura implements Serializable{
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long id;
 	@Column(name="CANTIDAD")
-	private float cantidad;
+	private double cantidad;
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="ID_CLIENTE")
 	private Cliente cliente;
 	
 	public Factura() {
 		super();
 	}
-	public Factura(float cantidad) {
+	public Factura(double cantidad) {
 		super();
 		this.cantidad = cantidad;
 	}
-	public Factura(float cantidad, Cliente cliente) {
+	public Factura(double cantidad, Cliente cliente) {
 		super();
 		this.cantidad = cantidad;
 		this.cliente = cliente;
@@ -46,10 +49,10 @@ public class Factura implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public float getCantidad() {
+	public double getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(float cantidad) {
+	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
 	public Cliente getCliente() {
