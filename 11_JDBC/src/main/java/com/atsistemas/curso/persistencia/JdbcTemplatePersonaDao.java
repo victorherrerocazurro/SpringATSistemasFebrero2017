@@ -15,8 +15,6 @@ public class JdbcTemplatePersonaDao extends JdbcDaoSupport implements PersonaDao
 	private static final String SELECT_PERSONAS_BY_NOMBRE = "SELECT * FROM PERSONA WHERE NOMBRE = ?";
 	private static final String SELECT_PERSONAS_BY_ID = "SELECT * FROM PERSONA WHERE ID = ?";
 	
-	
-	
 	/*public JdbcTemplatePersonaDao(JdbcTemplate jdbcTemplate) {
 		super();
 		setJdbcTemplate(jdbcTemplate);
