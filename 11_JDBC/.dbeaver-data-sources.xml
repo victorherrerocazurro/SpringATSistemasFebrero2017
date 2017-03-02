@@ -11,5 +11,20 @@
 				<property name="socks-port" value="1080"/>
 			</network-handler>
 		</connection>
+		<virtual-meta-data>
+			<container name="model">
+				<container name="ADMIN">
+					<entity name="PERSONA">
+						<constraint name="PRIMARY" type="VIRTUAL KEY">
+							<attribute name="ID"/>
+							<attribute name="NOMBRE"/>
+							<attribute name="EDAD"/>
+							<attribute name="ALTURA"/>
+							<attribute name="GENERO"/>
+						</constraint>
+					</entity>
+				</container>
+			</container>
+		</virtual-meta-data>
 	</data-source>
 </data-sources>
