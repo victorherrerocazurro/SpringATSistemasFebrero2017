@@ -1,38 +1,45 @@
-package com.atsistemas.curso;
+package com.atsistemas.curso.aplicacion.jpa;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("com.atsistemas.curso.persistencia.hibernate")
+@ComponentScans({
+	@ComponentScan("com.atsistemas.curso.persistencia.jpa"),
+	@ComponentScan("com.atsistemas.curso.negocio"),
+})
 @EnableTransactionManagement
 public class Configuracion {
 
 	@Bean
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-		return new HibernateTransactionManager(sessionFactory);
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+		return new JpaTransactionManager(entityManagerFactory);
 	}
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
-		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource){
+		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		
-		sessionFactoryBean.setDataSource(dataSource);
-		//sessionFactoryBean.setAnnotatedClasses(Cliente.class, Factura.class);
-		sessionFactoryBean.setPackagesToScan("com.atsistemas.curso.entidades");
+		entityManagerFactoryBean.setDataSource(dataSource);
+		
+		entityManagerFactoryBean.setPackagesToScan("com.atsistemas.curso.entidades");
+		
+		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		
 		Properties properties = new Properties();
 		
@@ -42,9 +49,9 @@ public class Configuracion {
 		//properties.setProperty("hibernate.current_session_context_class", "thread");
 		properties.setProperty("hibernate.hbm2ddl.auto", "validate");
 		
-		sessionFactoryBean.setHibernateProperties(properties);
+		entityManagerFactoryBean.setJpaProperties(properties);
 		
-		return sessionFactoryBean;
+		return entityManagerFactoryBean;
 	}
 	
 	@Bean
@@ -71,4 +78,5 @@ public class Configuracion {
 		
 		return placeholderConfigurer;
 	}
+	
 }
