@@ -32,7 +32,7 @@ public class JpaFacturaDao implements FacturaDao{
 
 	public Collection<Factura> consultarTodos() {
 		return entityManager.createQuery(
-							"from Factura", 
+							"from " + Factura.class.getSimpleName(), 
 							Factura.class).getResultList();
 	}
 
