@@ -1,4 +1,4 @@
-package com.atsistemas.curso.aplicacion.jpa;
+package com.atsistemas.curso.configuracion;
 
 import java.util.Properties;
 
@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,9 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -22,11 +26,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScans({
 	@ComponentScan("com.atsistemas.curso.negocio"),
+	@ComponentScan("com.atsistemas.curso.servicios")
 })
+@EnableJpaRepositories("com.atsistemas.curso.persistencia")
 @EnableTransactionManagement
-@EnableJpaRepositories("com.atsistemas.curso.persistencia.jpa.data")
 public class Configuracion {
-
+	
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
 		return new JpaTransactionManager(entityManagerFactory);

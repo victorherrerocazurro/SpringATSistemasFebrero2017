@@ -1,4 +1,4 @@
-package com.atsistemas.curso;
+package com.atsistemas.curso.configuracion;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ public class Inicializadora implements  WebApplicationInitializer{
 						new AnnotationConfigWebApplicationContext();
 		
 		springContext
-			.setConfigLocation("com.atsistemas.curso.aplicacion.jpa");
+			.setConfigLocation("com.atsistemas.curso.configuracion");
 		
 		//servletContext.setAttribute("MiContextoDeSpring", springContext);
 		

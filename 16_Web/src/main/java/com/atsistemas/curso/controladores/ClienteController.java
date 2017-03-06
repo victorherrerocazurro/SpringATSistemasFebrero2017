@@ -1,6 +1,8 @@
 package com.atsistemas.curso.controladores;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,13 +22,30 @@ import com.atsistemas.curso.negocio.DummyNegocio;
 @WebServlet("/Cliente")
 public class ClienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
+	private DummyNegocio negocio;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ClienteController() {
         super();
         // TODO Auto-generated constructor stub
+        
+    }
+    
+    @Override
+    public void init() throws ServletException {
+    	super.init();
+    	WebApplicationContext springContext = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
+		
+		//WebApplicationContext attribute = (WebApplicationContext) getServletContext().getAttribute("MiContextoDeSpring");
+		
+		negocio = springContext.getBean(DummyNegocio.class);
+    	
     }
 
 	/**
@@ -34,13 +53,10 @@ public class ClienteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		log.info("En el controller");
+		
 		String nombre = request.getParameter("nombre");
 		Float cantidad = Float.parseFloat(request.getParameter("cantidad"));
-		
-		WebApplicationContext springContext = WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext());
-		
-		DummyNegocio negocio = springContext.getBean(DummyNegocio.class);
 		
 		Cliente cliente = new Cliente(nombre);
 		
