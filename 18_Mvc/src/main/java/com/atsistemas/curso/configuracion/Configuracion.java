@@ -13,7 +13,8 @@ public class Configuracion {
 	
 	@Bean
 	public InternalResourceViewResolver viewResolver(){
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver("WEB-INF/Paginas/", ".jsp");
+		InternalResourceViewResolver viewResolver 
+			= new InternalResourceViewResolver("/WEB-INF/Paginas/", ".jsp");
 		
 		//viewResolver.setOrder(order);
 		
