@@ -2,10 +2,20 @@ package com.atsistemas.curso.entidades;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Persona implements Serializable{
 
+	@NotNull
 	private long id;
+	@Email
+	@NotEmpty
 	private String nombre;
+	@Min(value=18)
 	private int edad;
 	private double altura;
 	private String genero;
