@@ -1,9 +1,17 @@
 package com.atsistemas.curso.controladores;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +38,7 @@ import com.atsistemas.curso.entidades.Persona;
 public class PersonaController {
 
 	@RequestMapping(method=RequestMethod.GET, consumes=MediaType.ALL_VALUE)
-	public List<Persona> consultar(@RequestParam(required=false) Integer edad){
+	public ResponseEntity<List<Persona>> consultar(@RequestParam(required=false) Integer edad){
 		
 		LinkedList<Persona> personas = new LinkedList<>();
 		
@@ -43,26 +51,38 @@ public class PersonaController {
 			personas.add(new Persona(2, "Maria", 34, 1.60, "Mujer"));
 		}
 		
-		return personas;
+		return new ResponseEntity<>(personas, HttpStatus.OK);
 	}
 	
 	@RequestMapping(path="/{id}", method=RequestMethod.GET, consumes=MediaType.ALL_VALUE)
-	public Persona consultarPorId(@PathVariable long id){
-		return new Persona(id, "Pedro", 35, 1.70, "Hombre");
+	public ResponseEntity<Persona> consultarPorId(@PathVariable long id){
+		return new ResponseEntity<>(new Persona(id, "Pedro", 35, 1.70, "Hombre"), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public void insertar(@RequestBody Persona persona){
+	public ResponseEntity insertar(@RequestBody Persona persona, HttpServletRequest request) throws URISyntaxException{
 		// TODO retornar codigos de respuesta y location
+		System.out.println(persona);
+		HttpHeaders cabeceras = new HttpHeaders();
+		
+		cabeceras.setLocation(
+					new URI(
+							request.getRequestURL()
+										.append("/")
+										.append(persona.getId()).toString()));
+		
+		return new ResponseEntity<>(cabeceras, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
-	public void actualizar(@RequestBody Persona persona){
-		// TODO retornar codigos de respuesta y location
+	public ResponseEntity actualizar(@RequestBody Persona persona){
+		// TODO retornar codigos de respuesta
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(path="/{id}", method=RequestMethod.DELETE)
-	public void borrarPorId(@PathVariable long id){
-		// TODO retornar codigos de respuesta y location
+	public ResponseEntity borrarPorId(@PathVariable long id){
+		// TODO retornar codigos de respuesta
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
