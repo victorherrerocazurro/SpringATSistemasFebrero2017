@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.atsistemas.curso</groupId>
+  <artifactId>24_EjercicioClientesFacturas_v1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>24_Entidades</module>
+  	<module>24_Interfaces</module>
+  	<module>24_Vistas</module>
+  	<module>24_Negocio</module>
+  	<module>24_Controlador</module>
+  	<module>24_Servicios</module>
+  	<module>24_Persistencia</module>
+  	<module>24_AplicacionWeb</module>
+  </modules>
+  <dependencies>
+  	<dependency>
+  		<artifactId>junit</artifactId>
+  		<groupId>junit</groupId>
+  		<version>4.11</version>
+  		<scope>test</scope>
+  	</dependency>
+  </dependencies>
+</project>

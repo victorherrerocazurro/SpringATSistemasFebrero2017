@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.atsistemas.curso</groupId>
+		<artifactId>24_EjercicioClientesFacturas_v1</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>24_Interfaces</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>24_Entidades</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- 
+		Esto es viable, ya que en el momento de iniciar el proyecto
+		se sabe que tecnologias se van a emplear en la capa de persistencia 
+		-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.11.0.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>
