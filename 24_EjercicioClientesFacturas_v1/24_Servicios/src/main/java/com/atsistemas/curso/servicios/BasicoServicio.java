@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.atsistemas.curso.entidades.Cliente;
-import com.atsistemas.curso.entidades.Factura;
+import com.atsistemas.curso.dto.ClienteDto;
+import com.atsistemas.curso.dto.FacturaDto;
 import com.atsistemas.curso.persistencia.ClienteDao;
 import com.atsistemas.curso.persistencia.FacturaDao;
 
 @Component
+@Transactional
 public class BasicoServicio implements Servicio {
 
 	private FacturaDao facturaDao;
@@ -23,12 +25,12 @@ public class BasicoServicio implements Servicio {
 		this.clienteDao = clienteDao;
 	}
 
-	public void altaFactura(Factura factura) {
-		facturaDao.save(factura);
+	public void altaFactura(FacturaDto factura) {
+		facturaDao.save(factura.toFactura());
 	}
 
-	public void altaCliente(Cliente cliente) {
-		clienteDao.save(cliente);
+	public void altaCliente(ClienteDto cliente) {
+		clienteDao.save(cliente.toCliente());
 	}
 
 	public void bajaFactura(long id) {
@@ -39,36 +41,36 @@ public class BasicoServicio implements Servicio {
 		clienteDao.delete(id);
 	}
 
-	public void actualizarFactura(Factura factura) {
-		facturaDao.save(factura);
+	public void actualizarFactura(FacturaDto factura) {
+		facturaDao.save(factura.toFactura());
 	}
 
-	public void actualizarCliente(Cliente cliente) {
-		clienteDao.save(cliente);
+	public void actualizarCliente(ClienteDto cliente) {
+		clienteDao.save(cliente.toCliente());
 	}
 
-	public Factura obtenerFactura(long id) {
-		return facturaDao.findOne(id);
+	public FacturaDto obtenerFactura(long id) {
+		return new FacturaDto(facturaDao.findOne(id));
 	}
 
-	public Cliente obtenerCliente(long id) {
-		return clienteDao.findOne(id);
+	public ClienteDto obtenerCliente(long id) {
+		return new ClienteDto(clienteDao.findOne(id));
 	}
 
-	public List<Factura> obtenerFacturas() {
-		return facturaDao.findAll();
+	public List<FacturaDto> obtenerFacturas() {
+		return FacturaDto.toFacturasDto(facturaDao.findAll());
 	}
 
-	public List<Cliente> obtenerClientes() {
-		return clienteDao.findAll();
+	public List<ClienteDto> obtenerClientes() {
+		return ClienteDto.toClientesDto(clienteDao.findAll());
 	}
 
-	public List<Factura> obtenerFacturasCliente(long idCliente) {
-		return clienteDao.findOne(idCliente).getFacturas();
+	public List<FacturaDto> obtenerFacturasCliente(long idCliente) {
+		return FacturaDto.toFacturasDto(clienteDao.findOne(idCliente).getFacturas());
 	}
 
-	public Cliente obtenerClienteDeFactura(long idFactura) {
-		return facturaDao.findOne(idFactura).getCliente();
+	public ClienteDto obtenerClienteDeFactura(long idFactura) {
+		return new ClienteDto(facturaDao.findOne(idFactura).getCliente());
 	}
 
 }
