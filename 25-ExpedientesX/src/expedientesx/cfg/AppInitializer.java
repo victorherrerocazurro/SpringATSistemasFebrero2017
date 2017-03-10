@@ -23,13 +23,13 @@ public class AppInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/expedientesx/*");
     
-        /*
         servletContext.addFilter("springSecurityFilterChain", 
         		new DelegatingFilterProxy("springSecurityFilterChain"))
         			.addMappingForUrlPatterns(null, false, "/*");  
         
+        
         servletContext.addListener(new HttpSessionEventPublisher());
-        */
+        
         
     }
     

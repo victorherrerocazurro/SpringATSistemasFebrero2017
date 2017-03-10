@@ -15,6 +15,8 @@
 
 <div id="content">
 
+	<a href="<c:url value='/logout'/>">desconectar</a>
+
 	<h1>Página Principal</h1>
 	<p>
 		Cualquiera puede ver este recurso.

@@ -1,0 +1,19 @@
+server:
+  port: 8181
+
+spring:
+  datasource:
+    password: admin
+    username: admin
+    url: jdbc:derby://localhost:1527/PortalParejas
+    driver-class-name: org.apache.derby.jdbc.ClientDriver
+  mvc:
+    view:
+      prefix: /WEB-INF/templates/
+      suffix: .jsp
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+
+
